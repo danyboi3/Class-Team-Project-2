@@ -1,4 +1,4 @@
-package project.game;
+package edu.cuny.brooklyn.cisc3120.project.game;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
