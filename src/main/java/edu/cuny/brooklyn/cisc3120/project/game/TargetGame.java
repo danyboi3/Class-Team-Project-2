@@ -12,6 +12,7 @@ public class TargetGame {
 
 	private int GAME_TARGET_AREA_HEIGHT;
 	private int GAME_TARGET_AREA_WIDTH;
+	private boolean startAtLevel1;
 
 	GameBoard gameBoard;      // having its own dimension: cells
 	GameDisplay gameDisplay;  // having its own dimension: cells to characters
@@ -19,10 +20,10 @@ public class TargetGame {
 	private Scanner in;
 
 	public TargetGame() {
-		this(25, 80);
+		this(25, 80, true);
 	}
 
-	public TargetGame(int height, int width) {
+	public TargetGame(int height, int width, boolean startAtLevel1) {
 		GAME_TARGET_AREA_HEIGHT = height;
 		GAME_TARGET_AREA_WIDTH = width;
 
@@ -31,6 +32,8 @@ public class TargetGame {
 		rng = new Random();
 		in = new Scanner(System.in);
 		in.useDelimiter("(\\p{javaWhitespace}|,)+");
+
+		this.startAtLevel1 = startAtLevel1;
 	}
 
 	public void play() {
@@ -40,7 +43,7 @@ public class TargetGame {
 		gameBoard.plotBorder();
 		gameBoard.writeText(0, GAME_TARGET_AREA_HEIGHT - 1, "Enter your target position (x, y):");
 		while (!won && tries > 0) {
-			gameDisplay.draw(tries > 10);
+			gameDisplay.draw(tries > 10 && startAtLevel1);
 
 			int xGuess = 0;
 			int yGuess = 0;
