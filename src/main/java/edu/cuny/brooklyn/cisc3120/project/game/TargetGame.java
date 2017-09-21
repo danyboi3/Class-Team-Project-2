@@ -35,10 +35,11 @@ public class TargetGame {
 
 	public void play() {
 		boolean won = false;
+		int tries = 20;
 		setTarget();
 		gameBoard.plotBorder();
 		gameBoard.writeText(0, GAME_TARGET_AREA_HEIGHT - 1, "Enter your target position (x, y):");
-		while (!won) {
+		while (!won && tries > 0) {
 			gameDisplay.draw();
 
 			int xGuess = 0;
@@ -60,10 +61,15 @@ public class TargetGame {
 				}
 			} while (!valid);
 			logger.debug("Player guessed x = " + xGuess + ", y =" + yGuess + ".");
+
+			--tries;
+
 			if (gameBoard.getCell(xGuess, yGuess) == 'X') {
 				gameBoard.plotBorder();
 				gameBoard.writeText(0, GAME_TARGET_AREA_HEIGHT - 1, "You won. Game over.");
 				won = true;
+			} else if (tries == 0) {
+				System.out.println("You're all out of tries. Game over.");
 			} else {
 				gameBoard.plotBorder();
 				gameBoard.writeText(0, GAME_TARGET_AREA_HEIGHT - 1, "Try again. Enter your target position (x, y): ");
