@@ -40,7 +40,7 @@ public class TargetGame {
 		gameBoard.plotBorder();
 		gameBoard.writeText(0, GAME_TARGET_AREA_HEIGHT - 1, "Enter your target position (x, y):");
 		while (!won && tries > 0) {
-			gameDisplay.draw();
+			gameDisplay.draw(tries > 10);
 
 			int xGuess = 0;
 			int yGuess = 0;

@@ -7,10 +7,10 @@ public class GameDisplay {
 		this.gameBoard = gameBoard;
 	}
 
-	public void draw() {
+	public void draw(boolean visible) {
 		for (int[] row : gameBoard.getBoard()) {
 			for (int cell : row) {
-				System.out.print((char) cell);
+				System.out.print(cell == 'X' ? (visible ? 'X' : ' ') : ((char) cell));
 			}
 			System.out.println();
 		}
