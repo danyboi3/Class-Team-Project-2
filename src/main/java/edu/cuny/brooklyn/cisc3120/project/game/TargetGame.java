@@ -1,5 +1,6 @@
 package edu.cuny.brooklyn.cisc3120.project.game;
 
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -40,8 +41,24 @@ public class TargetGame {
 		while (!won) {
 			gameDisplay.draw();
 
-			int xGuess = in.nextInt();
-			int yGuess = in.nextInt();
+			int xGuess = 0;
+			int yGuess = 0;
+
+			boolean valid = false;
+			do {
+				String guess = in.nextLine();
+
+				if (guess.matches("^\\d+[\\s,]+\\d+$")) {
+					String[] guesses = guess.replaceAll("[^\\d]+", " ").split(" ");
+
+					xGuess = Integer.parseInt(guesses[0]);
+					yGuess = Integer.parseInt(guesses[1]);
+
+					valid = true;
+				} else {
+					System.out.println("Invalid input, please try again. (x, y):");
+				}
+			} while (!valid);
 			logger.debug("Player guessed x = " + xGuess + ", y =" + yGuess + ".");
 			if (gameBoard.getCell(xGuess, yGuess) == 'X') {
 				gameBoard.plotBorder();
@@ -51,8 +68,8 @@ public class TargetGame {
 				gameBoard.plotBorder();
 				gameBoard.writeText(0, GAME_TARGET_AREA_HEIGHT - 1, "Try again. Enter your target position (x, y): ");
 			}
-			gameDisplay.draw();
 		}
+
 	}
 
 	private void setTarget() {

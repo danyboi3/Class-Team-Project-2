@@ -27,6 +27,10 @@ public class GameBoard {
 	}
 
 	public int getCell(int x, int y) {
+		if(x >= boardCells.length || boardCells.length == 0 || y >= boardCells[0].length) {
+			return 0;
+		}
+
 		return boardCells[y][x];
 	}
 
