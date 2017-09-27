@@ -10,7 +10,7 @@ public class GameBoard {
 
 	int[][] boardCells;
 
-	public GameBoard(int height, int width) {
+	public GameBoard(int width, int height) {
 		this.width = width;
 		this.height = height;
 
@@ -27,40 +27,14 @@ public class GameBoard {
 	}
 
 	public int getCell(int x, int y) {
-		if(x >= boardCells.length || boardCells.length == 0 || y >= boardCells[0].length) {
-			return 0;
+		if (x >= height || height == 0 || y >= width || width == 0) {
+			return ' ';
 		}
 
-		return boardCells[y][x];
+		return boardCells[x][y];
 	}
 
 	public void setCell(int x, int y, int target) {
-		boardCells[y][x] = target;
-	}
-
-	public void plotBorder() {
-		for (int i = 0; i < width; i++) {
-			boardCells[0][i] = '-';
-			boardCells[height - 1][i] = '-';
-		}
-		for (int i = 0; i < height; i++) {
-			boardCells[i][0] = '|';
-			boardCells[i][width - 1] = '|';
-		}
-	}
-
-	public void writeText(int x, int y, String text) {
-		if (x < 0 || x >= width || y < 0 || y >= height) {
-			logger.debug("Text is outside of the displaying area.");
-			return;
-		}
-		for (int i = 0; i < text.length(); i++) {
-			if (x + i >= width) {
-				logger.debug("Text \"" + text.substring(i) + "\" is outside of the display area.");
-				break;
-			} else {
-				boardCells[y][x + i] = text.charAt(i);
-			}
-		}
+		boardCells[x][y] = target;
 	}
 }
