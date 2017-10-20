@@ -85,7 +85,7 @@ public class TargetGame {
 		int y = rng.nextInt(GAME_TARGET_AREA_WIDTH);
 
 		gameBoard.setCell(x, y, 'X');
-		logger.debug("Target: " + x + "," + y);
+		logger.debug("Target: " + (x + 1) + "," + (y + 1));
 	}
 
 }
